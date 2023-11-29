@@ -14,7 +14,7 @@ const useAuth = create(
     (set, get) => ({
       user: null,
       token: null,
-      clear: () => set({ user: null }),
+      clear: () => set({ user: null, token: null }),
       setToken: (token: string) => {
         set({ token });
       },

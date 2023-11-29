@@ -9,6 +9,8 @@ import useCart from "@/hooks/use-cart";
 import LocaleSwitcher from "./locale-switcher";
 import CurrencySwitcher from "./currency-switcher";
 import useAuth from "@/hooks/use-auth";
+import useLoginModal from "@/hooks/use-login-modal";
+import { ArrowLeftOnRectangleIcon } from '@heroicons/react/20/solid'
 
 interface Props {
     dictionary: {
@@ -20,6 +22,7 @@ interface Props {
 const NavbarActions = ({ dictionary }: Props) => {
     const [isMounted, setIsMounted] = useState(false);
     const auth = useAuth();
+    const loginModal = useLoginModal();
 
     useEffect(() => {
         setIsMounted(true);
@@ -37,7 +40,8 @@ const NavbarActions = ({ dictionary }: Props) => {
             <CurrencySwitcher />
             <LocaleSwitcher />
             {auth.token ? (
-                <Button onClick={() => router.push('/cart')} className="flex items-center rounded-full bg-black px-4 py-2">
+                <div className="flex items-center gap-x-2">
+                 <Button onClick={() => router.push('/cart')} className="flex items-center rounded-full bg-black px-4 py-2">
                     <ShoppingBag
                         size={20}
                         color="white"
@@ -46,10 +50,11 @@ const NavbarActions = ({ dictionary }: Props) => {
                         {cart.items.length}
                     </span>
                 </Button>
+                <ArrowLeftOnRectangleIcon onClick={auth.clear}  className="w-6 h-6 cursor-pointer" />
+                </div>
             ) : (
-                <Button onClick={() => router.push('/cart')} className="flex items-center rounded-full bg-black px-4 py-2">
-
-                    <span className="ml-2 text-sm font-medium text-white">
+                <Button onClick={loginModal.onOpen} className="flex items-center rounded-full bg-black px-4 py-2">
+                    <span className="text-sm font-medium text-white">
                         {dictionary.login}
                     </span>
                 </Button>

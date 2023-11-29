@@ -106,14 +106,14 @@ const LoginModal = () => {
                         <Button
                             disabled={isLoading}
                             onClick={handleSubmit(onSubmit)}
+                            className="w-full bg-slate-600"
                         >
-                            Sign In
+                            Login
                         </Button>
                     </div>
                     <div className="flex flex-col gap-4 mt-3">
                         <hr />
                         <Button
-
                             onClick={() => { }}
                         >
                             Continue with Google

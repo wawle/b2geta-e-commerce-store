@@ -11,6 +11,8 @@ import usePreviewModal from "@/hooks/use-preview-modal";
 import useCart from "@/hooks/use-cart";
 import { Product } from "@/types";
 import Rating from "./rating";
+import useAuth from "@/hooks/use-auth";
+import useLoginModal from "@/hooks/use-login-modal";
 
 interface ProductCard {
     data: Product
@@ -22,6 +24,8 @@ const ProductCard: React.FC<ProductCard> = ({
     const previewModal = usePreviewModal();
     const cart = useCart();
     const router = useRouter();
+    const auth = useAuth();
+    const loginModal = useLoginModal();
 
     const handleClick = () => {
         router.push(`/product/${data?.id}`);
@@ -35,6 +39,10 @@ const ProductCard: React.FC<ProductCard> = ({
 
     const onAddToCart: MouseEventHandler<HTMLButtonElement> = (event) => {
         event.stopPropagation();
+        if (!auth.token) {
+            loginModal.onOpen();
+            return
+        }
 
         cart.addItem(data);
     };
