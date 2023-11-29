@@ -1,0 +1,10 @@
+{
+  "welcome": "Willkommen",
+  "navbar": {
+    "login": "Anmeldung",
+    "products": "Produkte"
+  },
+  "product": {
+    "add_to_cart": "Zum Warenkorb hinzufügen"
+  }
+}

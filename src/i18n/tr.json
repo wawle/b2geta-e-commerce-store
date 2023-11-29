@@ -1,0 +1,10 @@
+{
+  "welcome": "Hoş geldin",
+  "navbar": {
+    "login": "Giriş",
+    "products": "Ürünler"
+  },
+  "product": {
+    "add_to_cart": "Sepete ekle"
+  }
+}
