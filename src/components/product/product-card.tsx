@@ -13,13 +13,23 @@ import { Product } from "@/types";
 import Rating from "./rating";
 import useAuth from "@/hooks/use-auth";
 import useLoginModal from "@/hooks/use-login-modal";
+import { MotionDiv } from "./motion";
 
 interface ProductCard {
     data: Product
+    index: number;
 }
 
+const stagger = 0.25;
+
+const variants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
+
 const ProductCard: React.FC<ProductCard> = ({
-    data
+    data,
+    index
 }) => {
     const previewModal = usePreviewModal();
     const cart = useCart();
@@ -47,6 +57,18 @@ const ProductCard: React.FC<ProductCard> = ({
         cart.addItem(data);
     };
     return (
+        <MotionDiv
+        variants={variants}
+        initial="hidden"
+        animate="visible"
+        transition={{
+          delay: index * stagger,
+          ease: "easeInOut",
+          duration: 0.5,
+        }}
+        viewport={{ amount: 0 }}
+        className="max-w-sm rounded relative w-full"
+      >
         <div onClick={handleClick} className="bg-white group cursor-pointer rounded-xl border p-3 space-y-4">
             {/* Image & actions */}
             <div className="aspect-square rounded-xl bg-gray-100 relative">
@@ -84,6 +106,7 @@ const ProductCard: React.FC<ProductCard> = ({
                 <Currency value={data?.price} />
             </div>
         </div>
+        </MotionDiv>
     );
 }
 

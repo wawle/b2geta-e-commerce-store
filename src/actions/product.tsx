@@ -1,3 +1,5 @@
+"use server";
+import ProductCard from "@/components/product/product-card";
 import { Product } from "@/types";
 
 interface ProductsQuery {
@@ -21,3 +23,20 @@ export const getProduct = async (id: string): Promise<Product> => {
 
   return res.json();
 };
+
+
+
+
+
+
+export async function fetchProducts(limit: number) {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/products?limit=${limit}&skip=8`
+  );
+
+  const {products} = await response.json();
+
+  return products.map((product: Product, index: number) => (
+    <ProductCard key={product.id} data={product} index={index} />
+  ));
+}

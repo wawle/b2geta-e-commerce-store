@@ -57,8 +57,8 @@ const ProductsPage: React.FC<ProductsPageProps> = async ({
                         <div className="mt-6 lg:col-span-4 lg:mt-0">
                             {total === 0 && <NoResults />}
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                                {products.map((item) => (
-                                    <ProductCard key={item.id} data={item} />
+                                {products.map((item, index) => (
+                                    <ProductCard key={item.id} data={item} index={index} />
                                 ))}
                             </div>
                         </div>
